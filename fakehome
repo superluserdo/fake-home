@@ -1,0 +1,18 @@
+#!/bin/sh
+SCRIPT=$(readlink -f "$0")
+export HOME="${XDG_DATA_HOME:-$HOME/.local/share}/fake-home"
+CMD="$(basename "$0")"
+
+which -a "$CMD" |  {
+while read -r EXEPATH
+do
+	if [ "$(readlink -f "$EXEPATH")" != "$SCRIPT" ]
+	then
+		echo exec "$EXEPATH" "$@"
+		exec "$EXEPATH" "$@"
+		exit 0
+	fi
+done
+>&2 echo "Couldn't find executable shadowed by $CMD"
+exit 1
+}
