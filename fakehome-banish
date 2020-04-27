@@ -1,0 +1,28 @@
+#!/bin/sh
+
+# Have a program that dumps its files in $HOME?
+# Banish it to a fake version of $HOME
+echo Banishing to "${BANISH_LOC:=$HOME/.local/bin/evil-software}"
+
+echo "$PATH" | tr ":" "\n" | grep -q "$BANISH_LOC" || {
+	>&2 "Need to add '$BANISH_LOC' to \$PATH first (eg in ~/.profile)"; exit 1; };
+
+mkdir -p "$BANISH_LOC"
+
+# Example: banish-software steam
+[ -n "$1" ] || { >&2 echo "Usage: $0 <program name>" ; exit 1 ; };
+
+FAKEHOME_LOC="$(which fakehome)"
+
+# Shadow the software by the fakehome wrapper
+[ -n "$FAKEHOME_LOC" ] || { echo >&2 "'fakehome' script not found in PATH"; exit 1; };
+ln -sf "$FAKEHOME_LOC" "$BANISH_LOC"/"$1"
+
+# Shadow any .desktop files
+DESKTOP_SRC=/usr/share/applications/"$1".desktop
+[ -f "$DESKTOP_SRC" ] || exit 0
+
+DESKTOP_DST=~/.local/share/applications/"$1".desktop
+[ -f "$DESKTOP_DST" ] && exit 0
+
+sed 's/\(^Exec=\)[^ ]* *\(.*$\)/\1'"$1"' \2/g' < "$DESKTOP_SRC" > "$DESKTOP_DST"
