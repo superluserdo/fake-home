@@ -38,3 +38,9 @@ Example:
 * `mv ~/.steam* ~/.local/share/fake-home/`
 
 * `fakehome-changesymlinks`
+
+---- 
+
+## Installation:
+
+* Run `make install` or just copy the scripts wherever you want in your `$PATH`
