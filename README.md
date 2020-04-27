@@ -2,7 +2,8 @@
 
 This is a simple set of scripts to take programs that clutter up your `$HOME`
 with dotfiles and banish them to a directory that is `$HOME` for only them. The
-principle is described in more detail at [https://github.com/superluserdo/fake-home](https://github.com/superluserdo/fake-home)
+principle is described in more detail at
+[https://superluserdo.xyz/blog/posts/2020/03/28/fake-home-prison/](https://superluserdo.xyz/blog/posts/2020/03/28/fake-home-prison/)
 
 ## `fakehome-banish`: Banish a program
 
