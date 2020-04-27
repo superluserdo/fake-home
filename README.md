@@ -1,7 +1,7 @@
 # fake-home
 
-This is a collection of scripts to take programs that clutter up your `$HOME`
-and banish them to a directory that is `$HOME` for them.
+This is a simple set of scripts to take programs that clutter up your `$HOME`
+with dotfiles and banish them to a directory that is `$HOME` for only them.
 
 ## `fakehome-banish`: Banish a program
 
@@ -27,10 +27,12 @@ to point inside the fake `$HOME`. For example, a program `foo` that had a
 symlink `~/.foo/bar` pointing to `~/.bar`, this will get updated to point to
 `~/.local/share/fake-home/.bar`
 
+----
+
 Example:
 
 * `fakehome-banish steam`
 
-* `mv ~/.steam* ~/.local/share/fake-home/
+* `mv ~/.steam* ~/.local/share/fake-home/`
 
 * `fakehome-changesymlinks`
