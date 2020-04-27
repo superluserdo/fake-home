@@ -1,7 +1,8 @@
 # fake-home
 
 This is a simple set of scripts to take programs that clutter up your `$HOME`
-with dotfiles and banish them to a directory that is `$HOME` for only them.
+with dotfiles and banish them to a directory that is `$HOME` for only them. The
+principle is described in more detail at [https://github.com/superluserdo/fake-home](https://github.com/superluserdo/fake-home)
 
 ## `fakehome-banish`: Banish a program
 
