@@ -1,0 +1,27 @@
+#!/bin/sh -eu
+
+# A script to alter all symlinks inside the fake-home to
+# point to the directories inside the fake-home instead of
+# the real $HOME. xdg-directories are not changed.
+
+echo Changing symlinks in "${FAKEHOME:=$HOME/.local/share/fake-home}"
+REQUIRE="^$HOME"
+DENY="$FAKEHOME
+.config
+.cache
+.local"
+
+find "$FAKEHOME" -type l | 
+	while read -r link; do
+		target="$(readlink "$link")"
+		echo "$target" | grep -q "$REQUIRE" || continue
+		(IFS='
+		'
+		for avoid_str in $DENY; do
+			echo "$target" | grep -q "$avoid_str" && exit 1
+		done
+		exit 0 ) || { continue; };
+		target_new="$(echo "$target" | sed "s|^$HOME|$FAKEHOME|")"
+		echo "$link: Changing target from $target to $target_new:"
+		ln -sf "$target_new" "$link"
+	done
