@@ -44,3 +44,5 @@ Example:
 ## Installation:
 
 * Run `make install` or just copy the scripts wherever you want in your `$PATH`
+
+* If on Arch Linux, install `fake-home` from the AUR
