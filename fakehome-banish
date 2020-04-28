@@ -2,6 +2,8 @@
 
 # Have a program that dumps its files in $HOME?
 # Banish it to a fake version of $HOME
+
+which "$1" || exit 1
 echo Banishing to "${BANISH_LOC:=$HOME/.local/bin/evil-software}"
 
 echo "$PATH" | tr ":" "\n" | grep -q "$BANISH_LOC" || {
