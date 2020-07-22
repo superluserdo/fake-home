@@ -7,7 +7,7 @@ which "$1" || exit 1
 echo Banishing to "${BANISH_LOC:=$HOME/.local/bin/evil-software}"
 
 echo "$PATH" | tr ":" "\n" | grep -q "$BANISH_LOC" || {
-	>&2 "Need to add '$BANISH_LOC' to \$PATH first (eg in ~/.profile)"; exit 1; };
+	echo >&2 "Need to add '$BANISH_LOC' to \$PATH first (eg in ~/.profile)"; exit 1; };
 
 mkdir -p "$BANISH_LOC"
 
